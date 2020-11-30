@@ -1,0 +1,93 @@
+<div class="container" id="body">
+  <div class="row">
+    <div class="col-md-12">
+      <img src="./assets/img/burger.jpg" alt="hamburger" width="128" height="153">
+      <h1>Burger Consumption Tracker</h1>
+    </div>
+  </div>
+    <div class="row">
+      <div class="col-lg-6 col-xs-12">
+        <div id="undevoured" class="card">
+          <ol class="list-group list-group-flush">
+            {{#each burgers}}
+              {{#unless devoured}}
+                <div id="undevouredListStyle">
+                  {{> burgers/burger-block devour=false}}
+                </div>
+              {{/unless}}
+            {{/each}}
+          </ol>
+        </div>
+      </div>
+
+
+      <div class="col-lg-6 col-xs-12">
+        <div id="devoured" class="card">
+          <ol class="list-group list-group-flush">
+            {{#each burgers}}
+              {{#if devoured}}
+                <div id="devouredListStyle">
+                  {{> burgers/burger-block devour=true}}
+                </div>
+              {{/if}}
+            {{/each}}
+          </ol>
+        </div>
+      </div>
+    </div>
+  <br>
+
+  <div id="input">
+    <form class="create-form">
+
+      <div class="form-group">
+        <input type="text" id="burgerName" name="burger_name" style="width: 30rem;">
+      </div>
+      
+      <div class="form-group">
+        <button name="submit" value='0' id="submit" class="submit btn btn-primary shadow" type="button">Submit</button>
+      </div>
+
+    </form>
+  </div>
+
+  <p> Enter a burger to consume! Hit Submit to add it to the list! </p>
+</div>
+
+<script>
+  $(function() {
+    $("#submit").on("click", function(event) {
+      event.preventDefault();
+      var newBurger = {
+        burger_name: $("#burgerName").val().trim(),
+        devoured: 0
+      };
+      $.ajax("/api/burgers", {
+        type: "POST",
+        data: newBurger
+      }).then(
+        function() {
+          console.log("created new burger");
+          location.reload();
+        }
+      );
+    });
+    $(".devour-button").on("click", function(event) {
+      var id = $(this).data("id");
+      var newDevour = $(this).data("newdevour");
+      var newDevourState = {
+        devoured: 1
+      };
+      $.ajax("/api/burgers/" + id, {
+        type: "PUT",
+        data: newDevourState
+      }).then(
+        function() {
+          console.log("updated burger");
+          location.reload();
+        }
+      );
+    });
+  });
+    
+</script>
