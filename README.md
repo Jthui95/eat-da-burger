@@ -1,5 +1,5 @@
 # Burger Logger
-Click [here]() to open the deployed Heroku application.
+Click [here](https://burgerapplication123.herokuapp.com/) to open the deployed Heroku application.
 
 ![ScreenShot](\public\assets\img\demo.png)
 
