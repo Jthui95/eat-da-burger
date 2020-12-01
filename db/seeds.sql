@@ -1,8 +1,8 @@
 INSERT INTO burgers (burger_name, devoured)
-VALUES ("Bacon Cheeseburger", FALSE);
+VALUES ("Double Cheeseburger", FALSE);
 INSERT INTO burgers (burger_name, devoured)
-VALUES ("Blue Cheeseburger", FALSE);
+VALUES ("Wester Bacon Cheeseburger", FALSE);
 INSERT INTO burgers (burger_name, devoured)
-VALUES ("Veggie Burger", FALSE);
+VALUES ("Whopper", FALSE);
 
 SELECT * FROM burgers
